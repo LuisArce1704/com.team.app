@@ -1,0 +1,49 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "Team"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "Team"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "Team"
+    }
+  }
+}
