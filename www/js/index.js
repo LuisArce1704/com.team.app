@@ -139,7 +139,7 @@ var notificationFull = app7.notification.create({
       app7.preloader.show('blue');
 
       app7.request({
-        url: 'http://localhost/team/api/login.php',
+        url: 'http://rysdepuebla.com/app/api/login.php',
         data:{username:usuario,password:password},
         method: 'POST', 
         crossDomain: true,
@@ -216,3 +216,9 @@ var notificationFull = app7.notification.create({
     console.log("ehh funciona");
   }
 
+  $$(document).on('page:init', '.page[data-name="login"]', function (e) {
+     
+  
+          
+  
+  });
