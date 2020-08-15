@@ -169,9 +169,6 @@ h1 {
     width: 30%;
   }
   .center{
-          
-    padding: 12px;
-    width: 800px; /*Es la medida del largo puede ponerse en % o px*/
     margin: 0  auto; /* propiedad para centrar nuestro box*/
 }
 
@@ -197,3 +194,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
   }
+  .sombra {
+    box-shadow: 2px 2px 5px #999;
+  }
+ 

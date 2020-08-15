@@ -19,7 +19,7 @@
 <div class="page-content"> 
 
 
-<div style="margin: 10px 55px 10px 55px; background-color: yellow; border-radius: 20px; border: black solid 1px; text-align: center;">Tienes "#" piezas sin seleccionar</div>
+<div style="margin: 10px 55px 10px 55px; background-color: yellow; border-radius: 20px; border: black solid 1px; text-align: center; ">Tienes piezas sin seleccionar</div>
     
  <div >
     <div style="width: 50%; float: left;" >
@@ -29,7 +29,7 @@
               <div class="stepper stepper-fill stepper-init" data-wraps="true" data-autorepeat="true" data-autorepeat-dynamic="true" data-decimal-point="2" data-manual-input-mode="true">
                 <div class="stepper-button-minus"></div>
                 <div class="stepper-input-wrap">
-                  <input type="text" value="0" min="0" max="1000" step="1">
+                  <input type="text" name="scrap" id="scrap" value="0" min="0" max="1000" step="1">
                 </div>
                 <div class="stepper-button-plus"></div>
               </div>
@@ -44,7 +44,7 @@
               <div class="stepper stepper-fill stepper-init" data-wraps="true" data-autorepeat="true" data-autorepeat-dynamic="true" data-decimal-point="2" data-manual-input-mode="true">
                 <div class="stepper-button-minus"></div>
                 <div class="stepper-input-wrap">
-                  <input type="text" value="0" min="0" max="1000" step="1">
+                  <input type="text" name="codigo" id="codigo" value="0" min="0" max="1000" step="1">
                 </div>
                 <div class="stepper-button-plus"></div>
               </div>
@@ -53,16 +53,16 @@
     </div>
  </div>
 
- <div class="text-align-center">
-    <img src="img/mas.png" width="10%" />
+
+
+<div class="row center" style="width: 80%;" >
+  <button  class="col button button-outline button-round button-raised color-blue" onclick="Guardar()">Ingresar mas piezas con scrap</button> 
 </div>
 
-
-
-
-  <div class="row" style="padding: 20px 80px 20px 80px;" >
-    <a href="/home2/" class="col button button-outline button-round button-raised color-green">Terminar</a> 
+  <div class="row" style="padding: 30px 80px 20px 80px;" >
+    <button  class="col button button-outline button-round button-raised color-red" onclick="Guardar1()">Terminar</button> 
   </div>
+  
 
  
   </div>
