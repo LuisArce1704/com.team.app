@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "650049570779",
+    "firebase_url": "https://rysdepuebla-e2137.firebaseio.com",
+    "project_id": "rysdepuebla-e2137",
+    "storage_bucket": "rysdepuebla-e2137.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650049570779:android:04551a3bd7ed8c8a01c9fe",
+        "android_client_info": {
+          "package_name": "com.team.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650049570779-qkpt81fuq7dm3208t47i7h4uodr4ndeu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNjun65Uu9a_HpwlnuFrrNdZFWWA7T5Zw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650049570779-qkpt81fuq7dm3208t47i7h4uodr4ndeu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
