@@ -191,7 +191,7 @@ var notificationFull = app7.notification.create({
 
 
     app7.request({
-      url: 'http://eleadex.online/team/api/settoken.php',
+      url: 'https://rysdepuebla.com/app/api/settoken.php',
       data:{token:token,platform:platform},
       method:'POST',
       crossDomain: true,
