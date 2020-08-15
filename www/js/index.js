@@ -2,39 +2,7 @@ var $$ = Dom7;
 
 //MuestraMensaje();
 
-var app = {
-     //Application Constructor
-    initialize: function() {
-      var push = PushNotification.init({
-        android:{
 
-        },ios:{
-            alert:"true",
-            badge:true,
-            sound:'false'
-        }
-  });
-
-  push.on('registration',function(data){
-        alert(data.registrationId);
-        console.log(data.registrationId);
-      console.log(data.registrationType);
-  })
-
-  push.on('notification', function (data) {
-
-    console.log(data.message);
-    console.log(data.title);
-    console.log(data.count);
-    console.log(data.sound);
-    console.log(data.image);
-    console.log(data.additionalData);
-
-});
-    
-    }
-
-};
 
 
 
