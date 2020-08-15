@@ -2,6 +2,75 @@ var $$ = Dom7;
 
 //MuestraMensaje();
 
+var token="";
+var platform="";
+
+var app = {
+  // Application Constructor
+  initialize: function() {
+      this.bindEvents();
+  },
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function() {
+      document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  // deviceready Event Handler
+  //
+  // The scope of 'this' is the event. In order to call the 'receivedEvent'
+  // function, we must explicitly call 'app.receivedEvent(...);'
+  onDeviceReady: function() {
+      app.receivedEvent('deviceready');
+  },
+  // Update DOM on a Received Event
+  receivedEvent: function(id) {
+
+
+    platform = device.platform;
+
+    if(device.platform !="browser"){
+     
+        var push = PushNotification.init({
+              android:{
+
+              },ios:{
+                  alert:"true",
+                  badge:true,
+                  sound:'false'
+              }
+        });
+
+
+        push.on('registration', function (data) {
+         
+          
+
+          getToken(data.registrationId,device.platform);
+          
+          token = data.registrationId;
+          console.log(data.registrationId);
+          console.log(data.registrationType);
+      
+          });
+
+
+          push.on('notification', function (data) {
+
+              console.log(data.message);
+              console.log(data.title);
+              console.log(data.count);
+              console.log(data.sound);
+              console.log(data.image);
+              console.log(data.additionalData);
+
+          });
+
+        }
+
+  }
+};
 
 
 
@@ -114,6 +183,29 @@ var notificationFull = app7.notification.create({
     text: 'This is a simple notification message',
     
   });
+
+  function getToken(token,platform){
+
+    var token = token;
+    var platform = platform;
+
+
+    app7.request({
+      url: 'http://eleadex.online/team/api/settoken.php',
+      data:{token:token,platform:platform},
+      method:'POST',
+      crossDomain: true,
+      success:function(data){
+     
+      
+      },
+      error:function(error){
+
+      }
+      
+      });
+    
+  }
 
   function Ingresar(){
       var usuario = $$('#usuario').val();
