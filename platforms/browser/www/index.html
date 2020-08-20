@@ -26,16 +26,27 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+
+  <meta http-equiv="Content-Security-Policy" content="font-src * 'self' data:; default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *" />
   
-  <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *" />
+  <meta name="author" content="AC APPS">
+  <meta name="description" content="Aplicación Movil para la empresa automotriz RYS de Puebla">
   
-  <meta name="author" content="GESDES Application">
-  <meta name="description" content="Aplicación Movil de diplomado">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- Color theme for statusbar (Android only) -->
     <meta name="theme-color" content="#2196f3">
 
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="shortcut icon" type="image/png" href="./img/logorys.png">
+    <link rel="apple-touch-icon" href="./img/logorys.png">
+    <link rel="apple-touch-startup-image" href="./img/logorys.png">
+    <meta name="apple-mobile-web-app-title" content="RysDePuebla">
+    <link rel="manifest" href="./manifest.json">
 
+
+  
     <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="css/framework7.bundle.min.css">
     <link rel="stylesheet" href="css/framework7-icons.css">
@@ -71,6 +82,7 @@
     <script type="text/javascript" src="js/framework7.bundle.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script src="script.js"></script>
     <script type="text/javascript">
 
         app.initialize();

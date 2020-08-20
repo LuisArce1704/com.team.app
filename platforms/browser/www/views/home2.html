@@ -15,7 +15,7 @@
 
 
 <div class="page-content"> 
-<div style="padding: 10px 10px 0 10px;"> <!--Margen-->
+<div style="padding: 10px 10px 0px 10px;"> <!--Margen-->
   <div data-pagination='{"el": ".swiper-pagination"}' data-space-between="50" class="swiper-container swiper-init demo-swiper" style="height: 200px;">
       <div class="swiper-pagination"></div>
       <div class="swiper-wrapper">
@@ -29,12 +29,15 @@
       </div>
     </div>
   </div>
+
+  <div style="margin: 0px 55px 10px 55px; background-color: yellow; border-radius: 20px; border: black solid 1px; text-align: center; ">Al FINZALIZAR tu turno da clic en SALIDA</div>
+    
   <div class="row" >
     <div class="center" style="width: 40%; padding-bottom: 20px; float: left;" >
     <a href="*"><button class="col button button-fill color-gray" >Entrada</button></a>
     </div>
     <div class="center" style="width: 40%; padding-bottom: 20px; float: left;" >
-    <a href="/bitacora/"><button class="col button button-fill color-red" >Salida</button></a>
+    <button class="col button button-fill color-red" onclick="salida()" >Salida</button>
   </div>
 </div>
 

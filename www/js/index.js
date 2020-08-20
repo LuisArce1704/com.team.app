@@ -4,6 +4,7 @@ var $$ = Dom7;
 
 var token="";
 var platform="";
+var resta="";
 
 var app = {
   // Application Constructor
@@ -72,6 +73,15 @@ var app = {
   }
 };
 
+function entrada(){
+  localStorage.setItem("Entrada", "autenticado");
+  mainView.router.navigate('/planta/',{animate:true});
+}
+function salida(){
+  localStorage.setItem("Entrada", "false");
+  mainView.router.navigate('/bitacora/',{animate:true});
+}
+
 
 
 
@@ -81,13 +91,15 @@ function showSplashScreen(){
 }
 
 function InitApp(){
-  
+  if(localStorage.getItem("Entrada", "autenticado")=="autenticado"){
+    mainView.router.navigate('/home2/',{animate:true});
+  }else{
   if(localStorage.getItem("team-login", "autenticado")=="autenticado"){
     mainView.router.navigate('/home/',{animate:true});
   }else{
     mainView.router.navigate('/login/',{animate:true});
   }
-}
+}}
 
 function CerrarSesion(){
   localStorage.setItem("team-login", "false");
@@ -210,9 +222,11 @@ var notificationFull = app7.notification.create({
   function Ingresar(){
       var usuario = $$('#usuario').val();
       var password = $$('#password').val();
-
+      
+      if(usuario <= 0){
+        alert("Ingresa un usuario");
+      }else{
       app7.preloader.show('blue');
-
       app7.request({
         url: 'https://rysdepuebla.com/app/api/login.php',
         data:{username:usuario,password:password},
@@ -239,7 +253,7 @@ var notificationFull = app7.notification.create({
 
           app7.preloader.hide();
         }
-      });
+      });}
   }
 
 function NuevaPieza(){
@@ -284,35 +298,64 @@ function NuevaPieza(){
     var idempre = $$('#idempre').val();
     var usuario = $$('#usuarior').val();
     var password = $$('#passwordr').val();
+   
   
-    app7.preloader.show('blue');
-  
-    app7.request({
-      url: 'https://rysdepuebla.com/app/api/users.php',
-      data:{usuario:usuario,password:password,nombre:nombre,apellidos:apellidos,telefono:telefono,idempre:idempre},
-      method: 'POST', 
-      crossDomain: true,
-      success:function(data){
-  
-          app7.preloader.hide();
-  
-          var objson = JSON.parse(data);
-          if(objson.status_message == "CORRECTO"){
-     
-          alert("Muchas gracias por registarte ya puedes acceder");
-          mainView.router.navigate('/login/',{animate:true});
-
+    //app7.preloader.show('blue');
+    if(nombre<=0){
+      alert("¡Ingresa un NOMBRE!")
+    }else{
+      if(apellidos<=0){
+        alert("¡Ingresa un Apellido!")
+      }else{
+        if(telefono<=0){
+          alert("¡Ingresa un telefono!")
+        }else{
+          if(idempre<=0){
+            alert("¡Ingresa un ID!")
           }else{
-  
-            alert("Hubo un error intentalo nuevamente");
+            if(usuario<=0){
+              alert("¡Ingresa un usuario!")
+            }else{
+              if(password<=0){
+                alert("¡Ingresa un Pasword!")
+              }else{
+                
+              app7.request({
+                url: 'https://rysdepuebla.com/app/api/users.php',
+                data:{usuario:usuario,password:password,nombre:nombre,apellidos:apellidos,telefono:telefono,idempre:idempre},
+                method: 'POST', 
+                crossDomain: true,
+                success:function(data){
+            
+                    app7.preloader.hide();
+            
+                    var objson = JSON.parse(data);
+                    if(objson.status_message == "CORRECTO"){
+              
+                    alert("Muchas gracias por registarte ya puedes acceder");
+                    mainView.router.navigate('/login/',{animate:true});
+
+                    }else{
+                      if(objson.status_message == "INCORRECTO"){
+              
+                        alert("INGRESA OTRO USUARIO");
+                        mainView.router.navigate('/registro/',{animate:true});
+    
+                        }}
+            
+                },
+                error:function(error){
+            
+                  app7.preloader.hide();
+                }
+              });
+                        }
+            }
           }
-  
-      },
-      error:function(error){
-  
-        app7.preloader.hide();
+        }
       }
-    });
+    }
+    
   
   }
 
@@ -326,10 +369,7 @@ function NuevaPieza(){
   }
 
   $$(document).on('page:init', '.page[data-name="inspeccion"]', function (e) {
-    var inspec = parseInt($$('#piezas-inspeccionadas').val());
-    var ok = parseInt($$('#piezas-ok').val());
-     var scrap = parseInt($$('#scrap').val());
-     var resta="";
+  
      
 
     app7.request({
@@ -368,6 +408,20 @@ function NuevaPieza(){
   });
  
   
+
+  $$(document).on('page:init', '.page[data-name="scrap"]', function (e) {
+          
+   
+     $$('#piezas-scrap').html(resta);
+  });
+  
+  $$(document).on('page:init', '.page[data-name="scrap2"]', function (e) {  
+    var resta = (parseInt(localStorage.getItem("resta")));
+    $$('#piezas-scrap1').html(resta);
+  });
+ 
+
+
 
   
   
@@ -441,10 +495,6 @@ function NuevaPieza(){
     mainView.router.navigate('/home2/',{animate:true});
   }
 
-
-
-
-
   $$(document).on('page:init', '.page[data-name="retrabajo"]', function (e) {
     app7.request({
       url: 'https://rysdepuebla.com/app/api/piezas.php',
@@ -482,7 +532,7 @@ function NuevaPieza(){
   var pieza = $$('#piezas-1').val();
   var inspec = parseInt($$('#piezas-inspeccionadas').val());
   var ok = parseInt($$('#piezas-ok').val());
-  var resta="";
+
   localStorage.setItem("pieza",pieza);
   if(inspec>0){
     if(ok>0){
@@ -495,6 +545,7 @@ if(ok <= inspec){
         if(df == true){
           mainView.router.navigate('/scrap/',{animate:true});
           localStorage.setItem("resta",resta);
+         
         }else{
           mainView.router.navigate('/inspeccion/',{animate:true});
         }
@@ -509,6 +560,39 @@ if(ok <= inspec){
   }
 }
 
+function Bitacora(){
+  var bitacora = $$('#bitacora').val();
+  var usuario = localStorage.getItem("usuario");
+  var turno = localStorage.getItem("turno");
+  var planta = localStorage.getItem("Planta");
+ 
+  app7.preloader.show('blue');
+  app7.request({
+    url: 'https://rysdepuebla.com/app/api/bitacora.php',
+    data:{  planta:planta,usuario:usuario,turno:turno,bitacora:bitacora},
+    method: 'POST', 
+    crossDomain: true,
+    success:function(data){
+
+      app7.preloader.hide();
+      var objson = JSON.parse(data);
+      if(objson.status_message == "CORRECTO"){
+     
+        alert("Finalizaste tu dia de tabajo ¡EXCELENTE DIA!");
+        mainView.router.navigate('/home/',{animate:true});
+
+        }else{
+
+          alert("Hubo un error intentalo nuevamente");
+        }
+      },
+      error:function(error){
+  
+        app7.preloader.hide();
+      }
+    });
+  }
+
 
 
 
@@ -516,6 +600,8 @@ if(ok <= inspec){
   function Retrabajo(){
     var usuario = localStorage.getItem("usuario");
     var turno = localStorage.getItem("turno");
+    var planta = localStorage.getItem("Planta");
+
     var pieza =$$('#piezas-2').val();
     var retrab = parseInt($$('#retrab').val());
     
@@ -523,7 +609,7 @@ if(ok <= inspec){
     app7.preloader.show('blue');
     app7.request({
       url: 'https://rysdepuebla.com/app/api/guardarRetrabajo.php',
-      data:{  usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
+      data:{  planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
       method: 'POST', 
       crossDomain: true,
       success:function(data){
@@ -556,6 +642,7 @@ if(ok <= inspec){
       var pieza = $$('#piezas-1').val();
       var inspec = $$('#piezas-inspeccionadas').val();
       var ok = $$('#piezas-ok').val();
+      var planta = localStorage.getItem("Planta");
      var usuario = localStorage.getItem("usuario");
      var turno = localStorage.getItem("turno");
      if(inspec>0){
@@ -564,7 +651,7 @@ if(ok <= inspec){
        app7.preloader.show('blue');
        app7.request({
          url: 'https://rysdepuebla.com/app/api/guardar1.php',
-         data:{ usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
+         data:{ planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
          method: 'POST', 
          crossDomain: true,
          success:function(data){
@@ -597,12 +684,14 @@ if(ok <= inspec){
       }
 
       function GuardarScrap(){
+       
         localStorage.setItem("scrap","");
         var pieza = localStorage.getItem("pieza");
         var scrap = parseInt($$('#scrap-1').val());
-        var codigo = parseInt($$('#codigo-1').val());
+        var codigo =parseInt($$('#codigo-1').val());
         var usuario = localStorage.getItem("usuario");
         var turno = localStorage.getItem("turno");
+        var planta = localStorage.getItem("Planta");
         
         localStorage.setItem("scrap",scrap);
         localStorage.setItem("codigo",codigo);
@@ -617,7 +706,7 @@ if(ok <= inspec){
           app7.preloader.show('blue');
           app7.request({
             url: 'https://rysdepuebla.com/app/api/guardar3.php',
-            data:{ usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
+            data:{ planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
             method: 'POST', 
             crossDomain: true,
             success:function(data){
@@ -631,8 +720,9 @@ if(ok <= inspec){
                 localStorage.setItem("resta",resta);
               }else{
                 resta=resta-scrap; 
+                
                 alert("Registra las piezas restantes que son " +resta );
-                mainView.router.navigate('/scrap2/',{animate:true});
+                mainView.router.navigate('/scrap2/',{reloadCurrent:true});
                 localStorage.setItem("resta",resta);
               }
         
@@ -647,7 +737,7 @@ if(ok <= inspec){
               }
             });
           }else{
-            alert("Faltan o restan piezas con scrap");
+            alert("Seleciona menos de o mayor que -> "+resta);
         
           }}else{
             alert("Seleciona un codigo de defecto");
@@ -662,21 +752,17 @@ if(ok <= inspec){
             var ok = parseInt($$('#piezas-ok').val());
              var scrap = parseInt($$('#scrap').val());
             var codigo = parseInt($$('#codigo').val());
+            var planta = localStorage.getItem("Planta");
             var usuario = localStorage.getItem("usuario");
             var turno = localStorage.getItem("turno");
-            var resta="";
             resta = inspec-ok;
-            
-            
-         
-         
             if(codigo>0){
               if(scrap>0){
             if(resta>scrap){
             app7.preloader.show('blue');
             app7.request({
               url: 'https://rysdepuebla.com/app/api/guardar.php',
-              data:{ usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+              data:{ planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
               method: 'POST', 
               crossDomain: true,
               success:function(data){
@@ -688,7 +774,7 @@ if(ok <= inspec){
                   localStorage.setItem("resta",resta);
                   alert("Registra las piezas restantes que son " +resta);
                   mainView.router.navigate('/scrap2/',{animate:true});
-          
+                
                   }else{
           
                     alert("Hubo un error intentalo nuevamente");
@@ -704,9 +790,9 @@ if(ok <= inspec){
             }}else{
               alert("Ingresa piezas con SCRAP");
             }
-          }else{
+         }else{
               alert("Seleciona un codigo de defecto");
-            }
+           }
           
             }
 
@@ -716,6 +802,7 @@ if(ok <= inspec){
               var ok = parseInt($$('#piezas-ok').val());
                var scrap = parseInt($$('#scrap').val());
               var codigo = parseInt($$('#codigo').val());
+              var planta = localStorage.getItem("Planta");
               var usuario = localStorage.getItem("usuario");
               var turno = localStorage.getItem("turno");
               var resta="";
@@ -730,7 +817,7 @@ if(ok <= inspec){
                   app7.preloader.show('blue');
                   app7.request({
                     url: 'https://rysdepuebla.com/app/api/guardar.php',
-                    data:{ usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+                    data:{ planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
                     method: 'POST', 
                     crossDomain: true,
                     success:function(data){
@@ -740,7 +827,7 @@ if(ok <= inspec){
                       if(objson.status_message == "CORRECTO"){
                      
                         alert("Se registro la inspeccion");
-                        mainView.router.navigate('/scrap2/',{animate:true});
+                        mainView.router.navigate('/home2/',{animate:true});
                         resta = resta-scrap;
                         localStorage.setItem("resta",resta);
                 
