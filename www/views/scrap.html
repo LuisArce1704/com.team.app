@@ -41,12 +41,10 @@
         <h5 style="text-align: center;">Codigo de defecto</h5>
         <div class="row text-align-center">
             <div class="col">
-              <div class="stepper stepper-fill stepper-init" data-wraps="true" data-autorepeat="true" data-autorepeat-dynamic="true" data-decimal-point="2" data-manual-input-mode="true">
-                <div class="stepper-button-minus"></div>
-                <div class="stepper-input-wrap">
-                  <input type="text" name="codigo" id="codigo" value="0" min="0" max="1000" step="1">
-                </div>
-                <div class="stepper-button-plus"></div>
+              <div class="item-input-wrap input-dropdown-wrap center" style="border: black solid 1px; border-radius: 5px; background-color: #dfe6f2; width: 25%;" class="sombra">
+                <select style="width: 100%; height: 24px; font-weight: 22px; padding-left: 10px;" name="codigo" id="codigo">
+                  <option>----</option>
+                </select>
               </div>
           </div>
         </div>
@@ -55,7 +53,7 @@
 
 
 
-<div class="row center" style="width: 80%;" >
+<div class="row center" style="width: 80%; padding-top: 10px;" >
   <button  class="col button button-outline button-round button-raised color-blue" onclick="Guardar()">Ingresar mas piezas con scrap</button> 
 </div>
 
