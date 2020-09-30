@@ -86,7 +86,7 @@ function salida(){
 /*
   app7.preloader.show('blue');
   app7.request({
-    url: 'https://rysdepuebla.com/app/api/salida.php',
+    url: 'salida.php',
     data:{  planta:planta,usuario:usuario,turno:turno},
     method: 'POST', 
     crossDomain: true,
@@ -237,7 +237,7 @@ var notificationFull = app7.notification.create({
 
 
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/settoken.php',
+      url: 'hhttps://rysdepuebla.com/app/api/settoken.php',
       data:{token:token,platform:platform},
       method:'POST',
       crossDomain: true,
@@ -466,7 +466,7 @@ function NuevaDefecto(){
           
           console.log(objson.data[x].idplanta);
           
-          pieza = '<option value="'+objson.data[x].nompieza+'-'+objson.data[x].numpieza+'"> '+objson.data[x].nompieza+'-'+objson.data[x].numpieza+'  </option>';
+          pieza = '<option value="'+objson.data[x].nompieza+'-'+objson.data[x].numpieza+'"> '+objson.data[x].numpieza+'  </option>';
     
           if(idplanta == objson.data[x].idplanta){
           $$('#piezas-1').append(pieza);
