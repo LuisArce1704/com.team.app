@@ -237,7 +237,7 @@ var notificationFull = app7.notification.create({
 
 
     app7.request({
-      url: 'hhttps://rysdepuebla.com/app/api/settoken.php',
+      url: 'hhttp://localhost/team/api/settoken.php',
       data:{token:token,platform:platform},
       method:'POST',
       crossDomain: true,
@@ -262,7 +262,7 @@ var notificationFull = app7.notification.create({
       }else{
       app7.preloader.show('blue');
       app7.request({
-        url: 'https://rysdepuebla.com/app/api/login.php',
+        url: 'http://localhost/team/api/login.php',
         data:{username:usuario,password:password},
         method: 'POST', 
         crossDomain: true,
@@ -299,7 +299,7 @@ function NuevaPieza(){
   if(numpieza != ""){
   app7.preloader.show('blue');
   app7.request({
-    url: 'https://rysdepuebla.com/app/api/nueva.php',
+    url: 'http://localhost/team/api/nueva.php',
     data:{numpieza:numpieza,nompieza:nompieza,idplanta:idplanta},
     method: 'POST', 
     crossDomain: true,
@@ -337,7 +337,7 @@ function NuevaDefecto(){
   if(numdefecto != ""){
   app7.preloader.show('blue');
   app7.request({
-    url: 'https://rysdepuebla.com/app/api/nuevodefecto.php',
+    url: 'http://localhost/team/api/nuevodefecto.php',
     data:{defecto:defecto,numdefecto:numdefecto,idplanta:idplanta},
     method: 'POST', 
     crossDomain: true,
@@ -397,7 +397,7 @@ function NuevaDefecto(){
               }else{
                 
               app7.request({
-                url: 'https://rysdepuebla.com/app/api/users.php',
+                url: 'http://localhost/team/api/users.php',
                 data:{usuario:usuario,password:password,nombre:nombre,apellidos:apellidos,telefono:telefono,idempre:idempre},
                 method: 'POST', 
                 crossDomain: true,
@@ -452,7 +452,7 @@ function NuevaDefecto(){
     
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/piezas.php',
+      url: 'http://localhost/team/api/piezas.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -495,7 +495,7 @@ function NuevaDefecto(){
      $$('#piezas-scrap').html(resta);
      app7.preloader.show('blue');
      app7.request({
-      url: 'https://rysdepuebla.com/app/api/codigo.php',
+      url: 'http://localhost/team/api/codigo.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -529,7 +529,7 @@ function NuevaDefecto(){
 
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/codigo.php',
+      url: 'http://localhost/team/api/codigo.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -562,7 +562,7 @@ function NuevaDefecto(){
     localStorage.setItem("suma",suma);
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/codigo.php',
+      url: 'http://localhost/team/api/codigo.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -604,7 +604,7 @@ function NuevaDefecto(){
   $$(document).on('page:init', '.page[data-name="planta"]', function (e) {
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/planta.php',
+      url: 'http://localhost/team/api/planta.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -633,7 +633,7 @@ function NuevaDefecto(){
     });
 
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/planta1.php',
+      url: 'http://localhost/team/api/planta1.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -689,7 +689,7 @@ function NuevaDefecto(){
      /*
   app7.preloader.show('blue');
   app7.request({
-    url: 'https://rysdepuebla.com/app/api/entrada.php',
+    url: 'http://localhost/team/api/entrada.php',
     data:{  planta:plan,usuario:usuario,turno:turno},
     method: 'POST', 
     crossDomain: true,
@@ -717,7 +717,7 @@ function NuevaDefecto(){
   $$(document).on('page:init', '.page[data-name="retrabajo"]', function (e) {
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/piezas.php',
+      url: 'http://localhost/team/api/piezas.php',
       data:{},
       method: 'POST', 
       crossDomain: true,
@@ -792,7 +792,7 @@ function Bitacora(){
  
   app7.preloader.show('blue');
   app7.request({
-    url: 'https://rysdepuebla.com/app/api/bitacora.php',
+    url: 'http://localhost/team/api/bitacora.php',
     data:{  planta:planta,usuario:usuario,turno:turno,bitacora:bitacora},
     method: 'POST', 
     crossDomain: true,
@@ -825,7 +825,7 @@ function Bitacora(){
     var usuario = localStorage.getItem("usuario");
     var turno = localStorage.getItem("turno");
     var planta = localStorage.getItem("Planta");
-
+    var comentario = $$('#comentario').val();
     var pieza =$$('#piezas-2').val();
     var retrab = parseInt($$('#retrab').val());
     
@@ -833,8 +833,8 @@ function Bitacora(){
     if(retrab>0){
     app7.preloader.show('blue');
     app7.request({
-      url: 'https://rysdepuebla.com/app/api/guardarRetrabajo.php',
-      data:{ planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
+      url: 'http://localhost/team/api/guardarRetrabajo.php',
+      data:{comentario:comentario,planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
       method: 'POST', 
       crossDomain: true,
       success:function(data){
@@ -867,6 +867,7 @@ function Bitacora(){
     function FinalizarIns(){
       
       var embarque = $$('#embarque').val();
+      var horas = $$('#horas').val();
       localStorage.setItem("embarque",embarque);
       var pieza = $$('#piezas-1').val();
       var inspec = $$('#piezas-inspeccionadas').val();
@@ -879,8 +880,8 @@ function Bitacora(){
       if(ok == inspec){
        app7.preloader.show('blue');
        app7.request({
-         url: 'https://rysdepuebla.com/app/api/guardar1.php',
-         data:{embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
+         url: 'http://localhost/team/api/guardar1.php',
+         data:{horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
          method: 'POST', 
          crossDomain: true,
          success:function(data){
@@ -938,7 +939,7 @@ function Bitacora(){
         if(scrap <= resta){
           app7.preloader.show('blue');
           app7.request({
-            url: 'https://rysdepuebla.com/app/api/guardar3.php',
+            url: 'http://localhost/team/api/guardar3.php',
             data:{ embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
             method: 'POST', 
             crossDomain: true,
@@ -986,6 +987,7 @@ function Bitacora(){
             var embarque = $$('#embarque').val();
             localStorage.setItem("embarque",embarque);
             var inspec = parseInt($$('#piezas-inspeccionadas').val());
+            var horas = $$('#horas').val();
             var ok = parseInt($$('#piezas-ok').val());
              var scrap = parseInt($$('#scrap').val());
             var codigo = $$('#codigo').val();
@@ -998,8 +1000,8 @@ function Bitacora(){
             if(resta>scrap){
             app7.preloader.show('blue');
             app7.request({
-              url: 'https://rysdepuebla.com/app/api/guardar.php',
-              data:{ embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+              url: 'http://localhost/team/api/guardar.php',
+              data:{ horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
               method: 'POST', 
               crossDomain: true,
               success:function(data){
@@ -1039,6 +1041,7 @@ function Bitacora(){
               localStorage.setItem("embarque",embarque);
               var inspec = parseInt($$('#piezas-inspeccionadas').val());
               var ok = parseInt($$('#piezas-ok').val());
+              var horas = $$('#horas').val();
                var scrap = parseInt($$('#scrap').val());
                var codigo = $$('#codigo').val();
               var planta = localStorage.getItem("Planta");
@@ -1055,8 +1058,8 @@ function Bitacora(){
                 if(resta==scrap){
                   app7.preloader.show('blue');
                   app7.request({
-                    url: 'https://rysdepuebla.com/app/api/guardar.php',
-                    data:{embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+                    url: 'http://localhost/team/api/guardar.php',
+                    data:{horas:horas,embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
                     method: 'POST', 
                     crossDomain: true,
                     success:function(data){
