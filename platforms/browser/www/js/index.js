@@ -237,7 +237,7 @@ var notificationFull = app7.notification.create({
 
 
     app7.request({
-      url: 'hhttp://localhost/team/api/settoken.php',
+      url: 'http://localhost/team/api/settoken.php',
       data:{token:token,platform:platform},
       method:'POST',
       crossDomain: true,
@@ -667,15 +667,21 @@ function NuevaDefecto(){
   function Turno(){
     var turno = $$('#turno-1').val();
     var plan = $$('#planta').val();
+    var semana = $$('#semana').val();
+    var mes = $$('#mes').val();
      var usuario = localStorage.getItem("usuario");
      parts = plan.split("-");
      part1 = parts[0]; // 123
      part2 = parts[1]; // 654321
      localStorage.setItem("turno", turno);
-     localStorage.setItem("Planta", part1);
+     localStorage.setItem("Planta", part1); 
      localStorage.setItem("idplanta", part2);
+     localStorage.setItem("semana", semana);
+     localStorage.setItem("mes", mes);
      localStorage.setItem("embarque", "");
 
+     if(mes != "--Selecciona MES--" ){
+     if(semana != "--Selecciona Semana--" ){
     if(plan != "--Escoge una planta automotirz--"){
      if(turno != "--Selecciona turno--"){
      alert("Inicia tu jornada de trabajo ¡EXCELENTE DIA!");
@@ -684,6 +690,10 @@ function NuevaDefecto(){
       alert("¡Escoge un TURNO!")
     }}else{
       alert("¡Escoge una PLANTA!")
+    }}else{
+      alert("¡Escoge una SEMANA!")
+    }}else{
+      alert("¡Escoge un MES!")
     }
      
      /*
@@ -825,6 +835,8 @@ function Bitacora(){
     var usuario = localStorage.getItem("usuario");
     var turno = localStorage.getItem("turno");
     var planta = localStorage.getItem("Planta");
+    var mes = localStorage.getItem("mes");
+    var semana = localStorage.getItem("semana");
     var comentario = $$('#comentario').val();
     var pieza =$$('#piezas-2').val();
     var retrab = parseInt($$('#retrab').val());
@@ -834,7 +846,7 @@ function Bitacora(){
     app7.preloader.show('blue');
     app7.request({
       url: 'http://localhost/team/api/guardarRetrabajo.php',
-      data:{comentario:comentario,planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
+      data:{mes:mes, semana:semana, comentario:comentario,planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
       method: 'POST', 
       crossDomain: true,
       success:function(data){
@@ -875,13 +887,15 @@ function Bitacora(){
       var planta = localStorage.getItem("Planta");
      var usuario = localStorage.getItem("usuario");
      var turno = localStorage.getItem("turno");
+     var mes = localStorage.getItem("mes");
+     var semana = localStorage.getItem("semana");
      if(inspec>0){
        if(ok>0){
       if(ok == inspec){
        app7.preloader.show('blue');
        app7.request({
          url: 'http://localhost/team/api/guardar1.php',
-         data:{horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
+         data:{mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
          method: 'POST', 
          crossDomain: true,
          success:function(data){
@@ -926,7 +940,8 @@ function Bitacora(){
         var usuario = localStorage.getItem("usuario");
         var turno = localStorage.getItem("turno");
         var planta = localStorage.getItem("Planta");
-        
+        var mes = localStorage.getItem("mes");
+        var semana = localStorage.getItem("semana");
         localStorage.setItem("scrap",scrap);
         localStorage.setItem("codigo",codigo);
         var scrap= (parseInt(localStorage.getItem("scrap")));
@@ -940,7 +955,7 @@ function Bitacora(){
           app7.preloader.show('blue');
           app7.request({
             url: 'http://localhost/team/api/guardar3.php',
-            data:{ embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
+            data:{ mes:mes, semana,semana, embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
             method: 'POST', 
             crossDomain: true,
             success:function(data){
@@ -994,6 +1009,9 @@ function Bitacora(){
             var planta = localStorage.getItem("Planta");
             var usuario = localStorage.getItem("usuario");
             var turno = localStorage.getItem("turno");
+            var mes = localStorage.getItem("mes");
+           var semana = localStorage.getItem("semana");
+          
             resta = inspec-ok;
             if(codigo != "----"){
               if(scrap>0){
@@ -1001,7 +1019,7 @@ function Bitacora(){
             app7.preloader.show('blue');
             app7.request({
               url: 'http://localhost/team/api/guardar.php',
-              data:{ horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+              data:{ mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
               method: 'POST', 
               crossDomain: true,
               success:function(data){
@@ -1047,6 +1065,8 @@ function Bitacora(){
               var planta = localStorage.getItem("Planta");
               var usuario = localStorage.getItem("usuario");
               var turno = localStorage.getItem("turno");
+              var mes = localStorage.getItem("mes");
+              var semana = localStorage.getItem("semana");
               var resta="";
               resta = inspec-ok;
               
@@ -1059,7 +1079,7 @@ function Bitacora(){
                   app7.preloader.show('blue');
                   app7.request({
                     url: 'http://localhost/team/api/guardar.php',
-                    data:{horas:horas,embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+                    data:{mes:mes, semana:semana, horas:horas,embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
                     method: 'POST', 
                     crossDomain: true,
                     success:function(data){
