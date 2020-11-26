@@ -75,7 +75,7 @@ var app = {
 
 function entrada(){
   mainView.router.navigate('/planta/',{animate:true});
-  localStorage.setItem("Entrada", "autenticado");
+  
 }
 function salida(){
   localStorage.setItem("Entrada", "false");
@@ -443,6 +443,9 @@ function NuevaDefecto(){
     alert("ehh funciona");
     console.log("ehh funciona");
   }
+  $$(document).on('page:init', '.page[data-name="home2"]', function (e) {
+    localStorage.setItem("Entrada", "autenticado");
+  });
 
   $$(document).on('page:init', '.page[data-name="inspeccion"]', function (e) {
     
@@ -665,21 +668,25 @@ function NuevaDefecto(){
   
   
   function Turno(){
+    
     var turno = $$('#turno-1').val();
     var plan = $$('#planta').val();
     var semana = $$('#semana').val();
     var mes = $$('#mes').val();
+    var area = $$('#area').val();
      var usuario = localStorage.getItem("usuario");
      parts = plan.split("-");
      part1 = parts[0]; // 123
      part2 = parts[1]; // 654321
      localStorage.setItem("turno", turno);
+     localStorage.setItem("area", area);
      localStorage.setItem("Planta", part1); 
      localStorage.setItem("idplanta", part2);
      localStorage.setItem("semana", semana);
      localStorage.setItem("mes", mes);
      localStorage.setItem("embarque", "");
 
+   
      if(mes != "--Selecciona MES--" ){
      if(semana != "--Selecciona Semana--" ){
     if(plan != "--Escoge una planta automotirz--"){
@@ -694,7 +701,8 @@ function NuevaDefecto(){
       alert("¡Escoge una SEMANA!")
     }}else{
       alert("¡Escoge un MES!")
-    }
+    } 
+     
      
      /*
   app7.preloader.show('blue');
@@ -765,7 +773,8 @@ function NuevaDefecto(){
   var pieza = $$('#piezas-1').val();
   var inspec = parseInt($$('#piezas-inspeccionadas').val());
   var ok = parseInt($$('#piezas-ok').val());
-
+  var comen1=$$('#comen1').val();
+  localStorage.setItem("comentario",comen1);
   localStorage.setItem("pieza",pieza);
   if(pieza != "--Selecciona una pieza--"){
   if(inspec>0){
@@ -836,6 +845,7 @@ function Bitacora(){
     var turno = localStorage.getItem("turno");
     var planta = localStorage.getItem("Planta");
     var mes = localStorage.getItem("mes");
+    var area = localStorage.getItem("area");
     var semana = localStorage.getItem("semana");
     var comentario = $$('#comentario').val();
     var pieza =$$('#piezas-2').val();
@@ -846,7 +856,7 @@ function Bitacora(){
     app7.preloader.show('blue');
     app7.request({
       url: 'https://rysdepuebla.com/app/api/guardarRetrabajo.php',
-      data:{mes:mes, semana:semana, comentario:comentario,planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
+      data:{area:area, mes:mes, semana:semana, comentario:comentario,planta:planta,usuario:usuario,turno:turno,pieza:pieza,retrab:retrab},
       method: 'POST', 
       crossDomain: true,
       success:function(data){
@@ -878,9 +888,12 @@ function Bitacora(){
 
     function FinalizarIns(){
       
+      
       var embarque = $$('#embarque').val();
       var horas = $$('#horas').val();
       localStorage.setItem("embarque",embarque);
+      var comen1=$$('#comen1').val();
+      localStorage.setItem("comentario",comen1);
       var pieza = $$('#piezas-1').val();
       var inspec = $$('#piezas-inspeccionadas').val();
       var ok = $$('#piezas-ok').val();
@@ -889,13 +902,14 @@ function Bitacora(){
      var turno = localStorage.getItem("turno");
      var mes = localStorage.getItem("mes");
      var semana = localStorage.getItem("semana");
+     var area = localStorage.getItem("area");
      if(inspec>0){
        if(ok>0){
       if(ok == inspec){
        app7.preloader.show('blue');
        app7.request({
          url: 'https://rysdepuebla.com/app/api/guardar1.php',
-         data:{mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
+         data:{comen1:comen1,area:area, mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok},
          method: 'POST', 
          crossDomain: true,
          success:function(data){
@@ -942,6 +956,7 @@ function Bitacora(){
         var planta = localStorage.getItem("Planta");
         var mes = localStorage.getItem("mes");
         var semana = localStorage.getItem("semana");
+        var area = localStorage.getItem("area");
         localStorage.setItem("scrap",scrap);
         localStorage.setItem("codigo",codigo);
         var scrap= (parseInt(localStorage.getItem("scrap")));
@@ -955,7 +970,7 @@ function Bitacora(){
           app7.preloader.show('blue');
           app7.request({
             url: 'https://rysdepuebla.com/app/api/guardar3.php',
-            data:{ mes:mes, semana,semana, embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
+            data:{area:area, mes:mes, semana,semana, embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,scrap:scrap,codigo:codigo},
             method: 'POST', 
             crossDomain: true,
             success:function(data){
@@ -1011,6 +1026,8 @@ function Bitacora(){
             var turno = localStorage.getItem("turno");
             var mes = localStorage.getItem("mes");
            var semana = localStorage.getItem("semana");
+           var area = localStorage.getItem("area");
+           var comen1 = localStorage.getItem("comentario");
           
             resta = inspec-ok;
             if(codigo != "----"){
@@ -1019,7 +1036,7 @@ function Bitacora(){
             app7.preloader.show('blue');
             app7.request({
               url: 'https://rysdepuebla.com/app/api/guardar.php',
-              data:{ mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+              data:{comen1:comen1,area:area, mes:mes, semana:semana, horas:horas,embarque:embarque,planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
               method: 'POST', 
               crossDomain: true,
               success:function(data){
@@ -1062,11 +1079,13 @@ function Bitacora(){
               var horas = $$('#horas').val();
                var scrap = parseInt($$('#scrap').val());
                var codigo = $$('#codigo').val();
+               var comen1 = localStorage.getItem("comentario");
               var planta = localStorage.getItem("Planta");
               var usuario = localStorage.getItem("usuario");
               var turno = localStorage.getItem("turno");
               var mes = localStorage.getItem("mes");
               var semana = localStorage.getItem("semana");
+              var area = localStorage.getItem("area");
               var resta="";
               resta = inspec-ok;
               
@@ -1079,7 +1098,7 @@ function Bitacora(){
                   app7.preloader.show('blue');
                   app7.request({
                     url: 'https://rysdepuebla.com/app/api/guardar.php',
-                    data:{mes:mes, semana:semana, horas:horas,embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
+                    data:{comen1:comen1, area:area,mes:mes, semana:semana, horas:horas,embarque:embarque, planta:planta,usuario:usuario,turno:turno,pieza:pieza,inspec:inspec,ok:ok,scrap:scrap,codigo:codigo},
                     method: 'POST', 
                     crossDomain: true,
                     success:function(data){
