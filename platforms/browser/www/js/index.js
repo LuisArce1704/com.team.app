@@ -450,6 +450,8 @@ function NuevaDefecto(){
   $$(document).on('page:init', '.page[data-name="inspeccion"]', function (e) {
     
     
+    var area = localStorage.getItem("area", area);
+    $$('#area').val(area);
     var embarque = localStorage.getItem("embarque");
     $$('#embarque').val(embarque);
     
@@ -673,18 +675,17 @@ function NuevaDefecto(){
     var plan = $$('#planta').val();
     var semana = $$('#semana').val();
     var mes = $$('#mes').val();
-    var area = $$('#area').val();
      var usuario = localStorage.getItem("usuario");
      parts = plan.split("-");
      part1 = parts[0]; // 123
      part2 = parts[1]; // 654321
      localStorage.setItem("turno", turno);
-     localStorage.setItem("area", area);
      localStorage.setItem("Planta", part1); 
      localStorage.setItem("idplanta", part2);
      localStorage.setItem("semana", semana);
      localStorage.setItem("mes", mes);
      localStorage.setItem("embarque", "");
+     localStorage.setItem("area","");
 
    
      if(mes != "--Selecciona MES--" ){
@@ -774,6 +775,8 @@ function NuevaDefecto(){
   var inspec = parseInt($$('#piezas-inspeccionadas').val());
   var ok = parseInt($$('#piezas-ok').val());
   var comen1=$$('#comen1').val();
+  var area = $$('#area').val();
+  localStorage.setItem("area", area);
   localStorage.setItem("comentario",comen1);
   localStorage.setItem("pieza",pieza);
   if(pieza != "--Selecciona una pieza--"){
@@ -888,7 +891,8 @@ function Bitacora(){
 
     function FinalizarIns(){
       
-      
+      var area = $$('#area').val();
+      localStorage.setItem("area", area);
       var embarque = $$('#embarque').val();
       var horas = $$('#horas').val();
       localStorage.setItem("embarque",embarque);
@@ -903,6 +907,7 @@ function Bitacora(){
      var mes = localStorage.getItem("mes");
      var semana = localStorage.getItem("semana");
      var area = localStorage.getItem("area");
+     if(pieza != "--Selecciona una pieza--"){
      if(inspec>0){
        if(ok>0){
       if(ok == inspec){
@@ -939,7 +944,10 @@ function Bitacora(){
         else{
           alert("¡No has ingresado piezas para inspeccionar!");
         }
-      }
+      }else{
+        alert("¡Escoge una Pieza!");
+      }}
+      
 
   
 
